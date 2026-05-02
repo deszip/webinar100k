@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
-// Hybrid output: pages are prerendered to static HTML by default,
-// but API routes (e.g. /api/wayforpay/signature) run as Vercel serverless functions.
+// Astro 5: pages are static by default. Routes can opt out with
+// `export const prerender = false` (see src/pages/api/wayforpay/signature.ts),
+// which makes that route run as a Vercel serverless function.
 export default defineConfig({
-  output: 'hybrid',
+  output: 'static',
   adapter: vercel({
     webAnalytics: { enabled: false },
   }),

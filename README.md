@@ -5,11 +5,16 @@ Mobile-first, Ukrainian copy, dark modern theme.
 
 ## Stack
 
-- **Astro 4** (hybrid output) — page is prerendered to static HTML; only the
-  WayForPay signing endpoint runs as a Vercel serverless function.
-- **`@astrojs/vercel`** adapter — `serverless` mode.
+- **Astro 5** (`output: 'static'`) — pages are prerendered to static HTML;
+  routes that `export const prerender = false` (here, the WayForPay signing
+  endpoint) run as Vercel serverless functions.
+- **`@astrojs/vercel` v8** adapter — uses **Node 22** runtime.
 - **WayForPay** widget — payments.
 - **Google Analytics 4 + Meta Pixel** — analytics, injected only when env IDs are set.
+
+> Node version is pinned to 22 via `engines.node` in `package.json` and `.nvmrc`.
+> Vercel reads both. Older Node versions (18) are no longer supported by
+> Vercel Serverless Functions.
 
 ## Project layout
 
