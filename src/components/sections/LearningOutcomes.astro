@@ -1,0 +1,33 @@
+---
+import { outcomes } from '../../data/content';
+---
+
+<section class="section outcomes">
+  <div class="container">
+    <div class="section-head">
+      <h2>{outcomes.title}</h2>
+    </div>
+
+    <div class="grid-2">
+      {
+        outcomes.columns.map((col) => (
+          <article class="card outcomes__col">
+            <h3>{col.title}</h3>
+            <ul class="check-list">
+              {col.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .outcomes__col h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+</style>

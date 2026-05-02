@@ -1,0 +1,84 @@
+---
+import { nav } from '../data/content';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="#top" class="brand">{nav.brand}</a>
+
+    <nav class="site-nav" aria-label="Основна навігація">
+      <ul>
+        {
+          nav.links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href="#pricing" class="btn btn-primary site-header__cta">{nav.ctaLabel}</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(11, 13, 23, 0.72);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 64px;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .site-header__cta {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
+    box-shadow: none;
+  }
+
+  @media (min-width: 880px) {
+    .site-nav {
+      display: block;
+    }
+    .site-nav ul {
+      display: flex;
+      gap: 28px;
+    }
+    .site-nav a {
+      color: var(--color-text-muted);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .site-nav a:hover {
+      color: var(--color-text);
+    }
+  }
+</style>

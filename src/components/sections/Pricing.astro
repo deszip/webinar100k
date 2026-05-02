@@ -1,0 +1,175 @@
+---
+import { pricing } from '../../data/content';
+
+const formatPrice = (n: number) =>
+  new Intl.NumberFormat('uk-UA').format(n);
+---
+
+<section class="section pricing" id={pricing.sectionId}>
+  <div class="container">
+    <div class="section-head">
+      <h2>{pricing.title}</h2>
+      <p>{pricing.subtitle}</p>
+    </div>
+
+    <div class="pricing__grid">
+      {
+        pricing.plans.map((plan) => (
+          <article class={`card plan ${plan.highlighted ? 'plan--highlight' : ''}`}>
+            {plan.badge && <span class="plan__badge">{plan.badge}</span>}
+
+            <h3>{plan.name}</h3>
+
+            <div class="plan__price">
+              {plan.priceOld && (
+                <span class="plan__price-old">
+                  {formatPrice(plan.priceOld)} {pricing.currencySymbol}
+                </span>
+              )}
+              <span class="plan__price-now">
+                {formatPrice(plan.price)} <em>{pricing.currencySymbol}</em>
+              </span>
+            </div>
+
+            <ul class="check-list plan__includes">
+              {plan.includes.map((line) => (
+                <li>{line}</li>
+              ))}
+            </ul>
+
+            <button
+              type="button"
+              class="btn btn-primary btn-block plan__cta"
+              data-pay
+              data-plan-id={plan.id}
+              data-plan-name={plan.productName}
+              data-plan-price={plan.price}
+              data-plan-currency={pricing.currency}
+            >
+              {plan.ctaLabel}
+            </button>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="pricing__guarantee">{pricing.guaranteeNote}</p>
+  </div>
+</section>
+
+<style>
+  .pricing__grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+  }
+
+  .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .plan--highlight {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--color-bg-elev), var(--color-bg-elev)) padding-box,
+      var(--gradient-primary) border-box;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .plan__badge {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .plan h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .plan__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .plan__price-old {
+    color: var(--color-text-dim);
+    text-decoration: line-through;
+    font-size: 1rem;
+  }
+
+  .plan__price-now {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    line-height: 1;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .plan__price-now em {
+    font-style: normal;
+    font-size: 0.55em;
+  }
+
+  .plan__includes {
+    flex: 1;
+  }
+
+  .plan__cta {
+    margin-top: 4px;
+  }
+
+  .pricing__guarantee {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-top: 28px;
+    font-size: 0.9rem;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 720px) {
+    .pricing__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .pricing__grid {
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+  }
+</style>
+
+<script>
+  import { startPayment } from '../../scripts/wayforpay';
+
+  document.querySelectorAll<HTMLButtonElement>('[data-pay]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const planId = btn.dataset.planId ?? '';
+      const productName = btn.dataset.planName ?? '';
+      const productPrice = Number(btn.dataset.planPrice ?? '0');
+      const currency = btn.dataset.planCurrency ?? 'UAH';
+
+      startPayment({ planId, productName, productPrice, currency });
+    });
+  });
+</script>

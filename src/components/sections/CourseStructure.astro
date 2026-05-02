@@ -1,0 +1,117 @@
+---
+import { program } from '../../data/content';
+---
+
+<section class="section program" id={program.sectionId}>
+  <div class="container">
+    <div class="section-head">
+      <h2>{program.title}</h2>
+      <p>{program.subtitle}</p>
+    </div>
+
+    <div class="program__list">
+      {
+        program.modules.map((m) => (
+          <article class="card module">
+            <header class="module__head">
+              <span class="module__number">{m.number}</span>
+              <div>
+                <span class="module__tag">{m.tag}</span>
+                <h3>{m.title}</h3>
+                <span class="module__duration">{m.duration}</span>
+              </div>
+            </header>
+
+            <p class="module__problem">{m.problem}</p>
+
+            <ul class="check-list">
+              {m.outcomes.map((o) => (
+                <li>{o}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .program__list {
+    display: grid;
+    gap: 20px;
+  }
+
+  .module {
+    display: grid;
+    gap: 18px;
+  }
+
+  .module__head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .module__number {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.2rem);
+    line-height: 1;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .module__tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--gradient-soft);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+
+  .module h3 {
+    margin: 0 0 6px;
+    font-size: 1.25rem;
+  }
+
+  .module__duration {
+    color: var(--color-text-dim);
+    font-size: 14px;
+  }
+
+  .module__problem {
+    color: var(--color-text-muted);
+    font-style: italic;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 14px;
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .program__list {
+      gap: 24px;
+    }
+    .module {
+      grid-template-columns: 0.55fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .module__head {
+      flex-direction: column;
+    }
+    .module__problem {
+      grid-column: 2;
+      margin-top: 0;
+    }
+    .module .check-list {
+      grid-column: 2;
+    }
+  }
+</style>

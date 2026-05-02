@@ -1,0 +1,119 @@
+---
+import { about } from '../../data/content';
+---
+
+<section class="section about">
+  <div class="container">
+    <div class="about__inner">
+      <div class="about__photo">
+        <span class="avatar lg">{about.avatar}</span>
+      </div>
+
+      <div class="about__body">
+        <span class="section-head__eyebrow">{about.title}</span>
+        <h2>{about.name}</h2>
+        <p class="about__tagline">{about.tagline}</p>
+        {about.bio.map((p) => <p class="about__paragraph">{p}</p>)}
+
+        <ul class="about__highlights">
+          {
+            about.highlights.map((h) => (
+              <li>
+                <strong>{h.value}</strong>
+                <span>{h.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__inner {
+    display: grid;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .about__photo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .section-head__eyebrow {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--gradient-soft);
+    color: var(--color-text);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 14px;
+  }
+
+  .about h2 {
+    margin-bottom: 8px;
+  }
+
+  .about__tagline {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+  }
+
+  .about__paragraph {
+    color: var(--color-text-muted);
+  }
+
+  .about__highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .about__highlights li {
+    background: var(--color-bg-elev);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px 14px;
+    text-align: center;
+  }
+
+  .about__highlights strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 4vw, 1.6rem);
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .about__highlights span {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  @media (min-width: 880px) {
+    .about__inner {
+      grid-template-columns: 280px 1fr;
+      gap: 56px;
+    }
+    .about__photo {
+      position: sticky;
+      top: 96px;
+      justify-content: flex-start;
+    }
+    .avatar.lg {
+      width: 220px;
+      height: 220px;
+      font-size: 64px;
+    }
+  }
+</style>

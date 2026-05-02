@@ -1,0 +1,71 @@
+---
+import { problemSolution } from '../../data/content';
+
+const icons: Record<string, string> = {
+  target:
+    '<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 16a6 6 0 1 1 6-6 6 6 0 0 1-6 6zm0-10a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2z"/>',
+  funnel:
+    '<path d="M3 4h18l-7 9v6l-4 2v-8z"/>',
+  pricing:
+    '<path d="M21 11V5a2 2 0 0 0-2-2h-6a2 2 0 0 0-1.41.59l-9 9a2 2 0 0 0 0 2.83l6 6a2 2 0 0 0 2.83 0l9-9A2 2 0 0 0 21 11zm-5-3a1.5 1.5 0 1 1 1.5-1.5A1.5 1.5 0 0 1 16 8z"/>',
+};
+---
+
+<section class="section problem-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>{problemSolution.title}</h2>
+      <p>{problemSolution.subtitle}</p>
+    </div>
+
+    <div class="grid-3">
+      {
+        problemSolution.items.map((item) => (
+          <article class="card problem-card">
+            <div class="problem-card__icon">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="currentColor"
+                aria-hidden="true"
+                set:html={icons[item.icon]}
+              />
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem-card {
+    text-align: left;
+  }
+
+  .problem-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--gradient-soft);
+    color: var(--color-accent);
+    margin-bottom: 20px;
+  }
+
+  .problem-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .problem-card p {
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+</style>

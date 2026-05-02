@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const orderRef = Astro.url.searchParams.get('order') ?? '';
+---
+
+<BaseLayout title="Дякуємо за оплату" description="Ми отримали твій платіж">
+  <main class="ty">
+    <div class="container ty__inner">
+      <span class="ty__check" aria-hidden="true">✓</span>
+      <h1>Дякуємо! Платіж прийнято.</h1>
+      <p>
+        Ми надішлемо доступ до особистого кабінету на твою email-адресу впродовж
+        наступних 5 хвилин. Якщо листа немає — перевір спам або напиши нам у підтримку.
+      </p>
+      {orderRef && <p class="ty__order">Номер замовлення: <code>{orderRef}</code></p>}
+      <a href="/" class="btn btn-secondary">Повернутись на головну</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .ty {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding-block: 80px;
+  }
+  .ty__inner {
+    max-width: 560px;
+    text-align: center;
+  }
+  .ty__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  .ty__order code {
+    background: var(--color-bg-elev);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .ty .btn {
+    margin-top: 16px;
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+import { testimonials } from '../../data/content';
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>{testimonials.title}</h2>
+      <p>{testimonials.subtitle}</p>
+    </div>
+
+    <div class="testimonials__grid">
+      {
+        testimonials.items.map((t) => (
+          <article class="card testimonial">
+            <p class="testimonial__text">{t.text}</p>
+            <footer class="testimonial__footer">
+              <span class="avatar">{t.avatar}</span>
+              <div>
+                <strong>{t.name}</strong>
+                <span class="testimonial__role">{t.role}</span>
+              </div>
+            </footer>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 100%;
+  }
+
+  .testimonial__text {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.55;
+    font-size: 0.98rem;
+  }
+
+  .testimonial__footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .testimonial__footer strong {
+    display: block;
+    font-size: 0.95rem;
+  }
+
+  .testimonial__role {
+    color: var(--color-text-dim);
+    font-size: 13px;
+  }
+
+  @media (min-width: 720px) {
+    .testimonials__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonials__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+</style>

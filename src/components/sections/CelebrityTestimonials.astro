@@ -1,0 +1,85 @@
+---
+import { celebrityTestimonials } from '../../data/content';
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>{celebrityTestimonials.title}</h2>
+    </div>
+
+    <div class="grid-3">
+      {
+        celebrityTestimonials.items.map((t) => (
+          <article class="card celeb">
+            <svg
+              class="celeb__quote-mark"
+              width="34"
+              height="26"
+              viewBox="0 0 34 26"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M0 26V14.7C0 10.3 1 6.7 3.1 4 5.1 1.4 8 0.1 11.7 0v5.4c-1.7 0.1-3 0.7-4 1.9C6.8 8.4 6.2 9.9 6.1 11.6h5.6V26H0zm22.3 0V14.7c0-4.4 1-8 3.1-10.7C27.5 1.4 30.4 0.1 34 0v5.4c-1.7 0.1-3 0.7-4 1.9-1 1.1-1.5 2.6-1.6 4.3H34V26H22.3z"
+                fill="url(#g)"
+              />
+              <defs>
+                <linearGradient id="g" x1="0" y1="0" x2="34" y2="26">
+                  <stop offset="0" stop-color="#ff5b8a" />
+                  <stop offset="1" stop-color="#7c5cff" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <p class="celeb__quote">{t.quote}</p>
+
+            <footer class="celeb__footer">
+              <span class="avatar">{t.avatar}</span>
+              <div>
+                <strong>{t.name}</strong>
+                <span>{t.role}</span>
+              </div>
+            </footer>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .celeb {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .celeb__quote-mark {
+    flex-shrink: 0;
+  }
+
+  .celeb__quote {
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .celeb__footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .celeb__footer strong {
+    display: block;
+  }
+
+  .celeb__footer span {
+    color: var(--color-text-dim);
+    font-size: 13px;
+  }
+</style>
