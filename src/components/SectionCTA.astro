@@ -1,0 +1,15 @@
+---
+import { webinarButton } from '../data/content';
+---
+
+<div class="section-cta">
+  <a href={webinarButton.href} class="btn btn-primary">{webinarButton.label}</a>
+</div>
+
+<style>
+  .section-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(24px, 4vw, 36px);
+  }
+</style>

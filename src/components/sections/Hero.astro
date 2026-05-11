@@ -4,15 +4,24 @@ import { hero } from '../../data/content';
 
 <section class="hero" id="top">
   <div class="container hero__inner">
-    <span class="hero__eyebrow">{hero.eyebrow}</span>
-
     <h1 class="hero__title">{hero.title}</h1>
+
+    <p class="hero__author">{hero.authorLine}</p>
 
     <p class="hero__subtitle">{hero.subtitle}</p>
 
+    <div class="hero__price" aria-label={hero.price.eyebrow}>
+      <span class="hero__price-eyebrow">{hero.price.eyebrow}</span>
+      <div class="hero__price-row">
+        <span class="hero__price-old">{hero.price.old}</span>
+        <strong>{hero.price.current}</strong>
+      </div>
+      <span class="hero__price-saving">{hero.price.saving}</span>
+      <span class="hero__price-note">{hero.price.note}</span>
+    </div>
+
     <div class="hero__cta">
       <a href={hero.ctaPrimary.href} class="btn btn-primary">{hero.ctaPrimary.label}</a>
-      <a href={hero.ctaSecondary.href} class="btn btn-secondary">{hero.ctaSecondary.label}</a>
     </div>
 
     <ul class="hero__bullets">
@@ -26,46 +35,114 @@ import { hero } from '../../data/content';
 <style>
   .hero {
     position: relative;
-    padding-block: clamp(72px, 14vw, 140px) clamp(48px, 9vw, 96px);
+    padding-block: clamp(44px, 9vw, 88px) clamp(42px, 7vw, 86px);
     overflow: hidden;
   }
 
   .hero__inner {
     text-align: center;
-    max-width: 880px;
-  }
-
-  .hero__eyebrow {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: var(--gradient-soft);
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 24px;
-    letter-spacing: 0.02em;
+    max-width: 760px;
   }
 
   .hero__title {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    font-size: clamp(2.05rem, 8.2vw, 4.75rem);
+    line-height: 1.02;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .hero__author {
+    max-width: 620px;
+    margin: 0 auto 16px;
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
   }
 
   .hero__subtitle {
     color: var(--color-text-muted);
-    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-    line-height: 1.55;
-    max-width: 720px;
-    margin: 0 auto 32px;
+    font-size: clamp(0.98rem, 2.3vw, 1.12rem);
+    line-height: 1.5;
+    max-width: 660px;
+    margin: 0 auto 22px;
+  }
+
+  .hero__price {
+    display: grid;
+    gap: 8px;
+    width: min(100%, 430px);
+    margin: 0 auto 18px;
+    padding: clamp(18px, 4vw, 24px);
+    border-radius: 24px;
+    background: var(--color-bg-elev);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hero__price-eyebrow,
+  .hero__price-note {
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .hero__price-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .hero__price-old {
+    color: var(--color-text-dim);
+    text-decoration: line-through;
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
+    font-weight: 700;
+  }
+
+  .hero__price strong {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 13vw, 5.5rem);
+    line-height: 0.95;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .hero__price-saving {
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
   }
 
   .hero__cta {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
+  }
+
+  .hero__cta .btn {
+    width: min(100%, 430px);
+    min-height: 60px;
+    height: auto;
+    padding: 16px 28px;
+    border-radius: 18px;
+    font-size: clamp(1rem, 2.4vw, 1.15rem);
+    font-weight: 800;
+    white-space: normal;
   }
 
   .hero__bullets {
@@ -95,19 +172,44 @@ import { hero } from '../../data/content';
     position: absolute;
     inset: -20% 50% auto -20%;
     height: 480px;
-    background: radial-gradient(circle, rgba(124, 92, 255, 0.55), transparent 60%);
-    filter: blur(80px);
+    background: radial-gradient(circle, rgba(240, 79, 134, 0.18), transparent 62%);
+    filter: blur(70px);
     pointer-events: none;
     z-index: -1;
   }
 
   @media (max-width: 480px) {
+    .hero {
+      padding-top: 34px;
+    }
+
+    .hero__title {
+      font-size: clamp(2rem, 10vw, 2.85rem);
+    }
+
+    .hero__price {
+      width: 100%;
+    }
+
     .hero__cta {
       flex-direction: column;
       align-items: stretch;
     }
-    .hero__cta .btn {
-      width: 100%;
+
+    .hero__bullets {
+      display: grid;
+      justify-content: stretch;
+      text-align: left;
+      gap: 10px;
+    }
+
+    .hero__bullets li {
+      align-items: flex-start;
+    }
+
+    .hero__bullets li::before {
+      flex: 0 0 auto;
+      margin-top: 8px;
     }
   }
 </style>

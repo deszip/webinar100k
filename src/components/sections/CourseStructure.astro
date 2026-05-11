@@ -1,5 +1,5 @@
 ---
-import { program } from '../../data/content';
+import { program, webinarButton } from '../../data/content';
 ---
 
 <section class="section program" id={program.sectionId}>
@@ -32,6 +32,10 @@ import { program } from '../../data/content';
           </article>
         ))
       }
+    </div>
+
+    <div class="program__cta">
+      <a href={webinarButton.href} class="btn btn-primary">{webinarButton.label}</a>
     </div>
   </div>
 </section>
@@ -92,6 +96,20 @@ import { program } from '../../data/content';
     border-left: 3px solid var(--color-accent);
     padding-left: 14px;
     margin: 0;
+  }
+
+  .program__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(24px, 4vw, 36px);
+    text-align: center;
+  }
+
+  .program__cta .btn {
+    width: min(100%, 430px);
+    min-height: 56px;
+    height: auto;
+    white-space: normal;
   }
 
   @media (min-width: 1024px) {

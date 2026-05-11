@@ -1,5 +1,6 @@
 ---
 import { audience } from '../../data/content';
+import SectionCTA from '../SectionCTA.astro';
 ---
 
 <section class="section" id={audience.sectionId}>
@@ -25,6 +26,7 @@ import { audience } from '../../data/content';
     </div>
 
     <p class="audience__note">{audience.bottomNote}</p>
+    <SectionCTA />
   </div>
 </section>
 

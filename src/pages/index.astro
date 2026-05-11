@@ -1,32 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
 import Hero from '../components/sections/Hero.astro';
+import WebinarPreview from '../components/sections/WebinarPreview.astro';
 import TargetAudience from '../components/sections/TargetAudience.astro';
 import ProblemSolution from '../components/sections/ProblemSolution.astro';
 import CourseStructure from '../components/sections/CourseStructure.astro';
-import LearningOutcomes from '../components/sections/LearningOutcomes.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import About from '../components/sections/About.astro';
 import CelebrityTestimonials from '../components/sections/CelebrityTestimonials.astro';
+import Bonuses from '../components/sections/Bonuses.astro';
 import Pricing from '../components/sections/Pricing.astro';
 import FAQ from '../components/sections/FAQ.astro';
+import FinalCTA from '../components/sections/FinalCTA.astro';
 import Footer from '../components/sections/Footer.astro';
+import FloatingCTA from '../components/FloatingCTA.astro';
 ---
 
 <BaseLayout>
-  <Header />
   <main>
     <Hero />
     <TargetAudience />
-    <ProblemSolution />
+    <WebinarPreview />
     <CourseStructure />
-    <LearningOutcomes />
-    <Testimonials />
+    <Bonuses />
+    <ProblemSolution />
     <About />
+    <Testimonials />
     <CelebrityTestimonials />
     <Pricing />
     <FAQ />
+    <FinalCTA />
   </main>
   <Footer />
+  <FloatingCTA />
 </BaseLayout>

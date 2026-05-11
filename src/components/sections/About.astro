@@ -1,12 +1,13 @@
 ---
 import { about } from '../../data/content';
+import SectionCTA from '../SectionCTA.astro';
 ---
 
 <section class="section about">
   <div class="container">
     <div class="about__inner">
       <div class="about__photo">
-        <span class="avatar lg">{about.avatar}</span>
+        <img src="/reviews/about_me.JPG" alt={about.name} class="about__image" loading="lazy" decoding="async" />
       </div>
 
       <div class="about__body">
@@ -25,6 +26,8 @@ import { about } from '../../data/content';
             ))
           }
         </ul>
+
+        <SectionCTA />
       </div>
     </div>
   </div>
@@ -40,6 +43,17 @@ import { about } from '../../data/content';
   .about__photo {
     display: flex;
     justify-content: center;
+  }
+
+  .about__image {
+    width: min(100%, 280px);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    background: var(--color-bg-elev);
   }
 
   .section-head__eyebrow {
@@ -110,10 +124,8 @@ import { about } from '../../data/content';
       top: 96px;
       justify-content: flex-start;
     }
-    .avatar.lg {
-      width: 220px;
-      height: 220px;
-      font-size: 64px;
+    .about__image {
+      width: 260px;
     }
   }
 </style>
