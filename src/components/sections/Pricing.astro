@@ -37,17 +37,12 @@ const formatPrice = (n: number) =>
               ))}
             </ul>
 
-            <button
-              type="button"
+            <a
+              href="https://secure.wayforpay.com/button/b36a7aaecbaba"
               class="btn btn-primary btn-block plan__cta"
-              data-pay
-              data-plan-id={plan.id}
-              data-plan-name={plan.productName}
-              data-plan-price={plan.price}
-              data-plan-currency={pricing.currency}
             >
               {plan.ctaLabel}
-            </button>
+            </a>
           </article>
         ))
       }
@@ -158,18 +153,3 @@ const formatPrice = (n: number) =>
     }
   }
 </style>
-
-<script>
-  import { startPayment } from '../../scripts/wayforpay';
-
-  document.querySelectorAll<HTMLButtonElement>('[data-pay]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const planId = btn.dataset.planId ?? '';
-      const productName = btn.dataset.planName ?? '';
-      const productPrice = Number(btn.dataset.planPrice ?? '0');
-      const currency = btn.dataset.planCurrency ?? 'UAH';
-
-      startPayment({ planId, productName, productPrice, currency });
-    });
-  });
-</script>
