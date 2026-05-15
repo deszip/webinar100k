@@ -10,14 +10,6 @@ import { footer } from '../../data/content';
     </div>
 
     <div class="site-footer__col">
-      <h4>Контакти</h4>
-      <a href={`mailto:${footer.contacts.email}`}>{footer.contacts.email}</a>
-      <a href={`tel:${footer.contacts.phone.replace(/\s|\(|\)|-/g, '')}`}>
-        {footer.contacts.phone}
-      </a>
-    </div>
-
-    <div class="site-footer__col">
       <h4>Соцмережі</h4>
       {
         footer.socials.map((s) => (
@@ -30,7 +22,13 @@ import { footer } from '../../data/content';
 
     <div class="site-footer__col">
       <h4>Документи</h4>
-      {footer.legalLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+      {
+        footer.legalLinks.map((l) => (
+          <a href={l.href} target="_blank" rel="noopener noreferrer">
+            {l.label}
+          </a>
+        ))
+      }
     </div>
   </div>
 
@@ -100,7 +98,7 @@ import { footer } from '../../data/content';
 
   @media (min-width: 720px) {
     .site-footer__inner {
-      grid-template-columns: 1.4fr repeat(3, 1fr);
+      grid-template-columns: 1.4fr repeat(2, 1fr);
       gap: 32px;
     }
   }

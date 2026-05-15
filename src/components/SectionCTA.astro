@@ -1,9 +1,15 @@
 ---
 import { webinarButton } from '../data/content';
+
+interface Props {
+  label?: string;
+}
+
+const { label = webinarButton.label } = Astro.props;
 ---
 
 <div class="section-cta">
-  <a href={webinarButton.href} class="btn btn-primary">{webinarButton.label}</a>
+  <a href={webinarButton.href} class="btn btn-primary">{label}</a>
 </div>
 
 <style>

@@ -1,5 +1,5 @@
 ---
-import { pricing } from '../../data/content';
+import { pricing, wayforpayUrl } from '../../data/content';
 
 const formatPrice = (n: number) =>
   new Intl.NumberFormat('uk-UA').format(n);
@@ -38,7 +38,7 @@ const formatPrice = (n: number) =>
             </ul>
 
             <a
-              href="https://secure.wayforpay.com/button/b36a7aaecbaba"
+              href={wayforpayUrl}
               class="btn btn-primary btn-block plan__cta"
             >
               {plan.ctaLabel}

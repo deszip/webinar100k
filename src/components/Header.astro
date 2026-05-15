@@ -1,12 +1,12 @@
 ---
-import { nav } from '../data/content';
+import { nav, wayforpayUrl } from '../data/content';
 ---
 
 <header class="site-header">
   <div class="container site-header__inner">
     <a href="#top" class="brand">{nav.brand}</a>
 
-    <a href="#pricing" class="btn btn-primary site-header__cta">{nav.ctaLabel}</a>
+    <a href={wayforpayUrl} class="btn btn-primary site-header__cta">{nav.ctaLabel}</a>
   </div>
 </header>
 

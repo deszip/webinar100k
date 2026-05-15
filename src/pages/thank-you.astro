@@ -1,20 +1,55 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const orderRef = Astro.url.searchParams.get('order') ?? '';
+const telegramBot = 'https://t.me/Vebinar_yak_zarobyty_100000_bot';
 ---
 
-<BaseLayout title="Дякуємо за оплату" description="Ми отримали твій платіж">
+<BaseLayout
+  title="Дякуємо за покупку — Instagram Cashflow"
+  description="Доступ до вебінару та бонусу — у Telegram-боті"
+>
   <main class="ty">
     <div class="container ty__inner">
       <span class="ty__check" aria-hidden="true">✓</span>
-      <h1>Дякуємо! Платіж прийнято.</h1>
-      <p>
-        Ми надішлемо доступ до особистого кабінету на твою email-адресу впродовж
-        наступних 5 хвилин. Якщо листа немає — перевір спам або напиши нам у підтримку.
+
+      <h1>Дякую за покупку!</h1>
+
+      <p class="ty__lead">
+        Ти вже на крок ближче до системи, що приводить клієнтів через Instagram.
+        Доступ до вебінару та бонус <strong>«Конструктор розмовних Reels»</strong>
+        чекають на тебе в Telegram-боті — натисни кнопку нижче.
       </p>
-      {orderRef && <p class="ty__order">Номер замовлення: <code>{orderRef}</code></p>}
-      <a href="/" class="btn btn-secondary">Повернутись на головну</a>
+
+      <a
+        href={telegramBot}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary ty__cta"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ty__cta-icon">
+          <path
+            fill="currentColor"
+            d="M9.78 16.78 9.6 13.4l7.4-6.7c.32-.29-.07-.43-.5-.18l-9.13 5.77-3.94-1.23c-.85-.27-.86-.86.19-1.27l15.36-5.93c.7-.27 1.37.17 1.1 1.27l-2.62 12.36c-.18.86-.7 1.07-1.4.66l-3.86-2.85-1.86 1.8c-.21.21-.39.39-.79.39Z"
+          />
+        </svg>
+        <span>Перейти у Telegram-бот</span>
+      </a>
+
+      <ol class="ty__steps">
+        <li>Відкрий бот за кнопкою вище.</li>
+        <li>Натисни <strong>Start</strong> у Telegram.</li>
+        <li>Бот одразу надішле посилання на вебінар і PDF-бонус.</li>
+      </ol>
+
+      <p class="ty__support">
+        Не приходить повідомлення від бота? Напиши в Direct
+        <a href="https://instagram.com/gaevskaya_smm" target="_blank" rel="noopener noreferrer">
+          @gaevskaya_smm
+        </a>
+        — вирішимо за кілька хвилин.
+      </p>
+
+      <a href="/" class="ty__home">← Повернутись на головну</a>
     </div>
   </main>
 </BaseLayout>
@@ -24,31 +59,118 @@ const orderRef = Astro.url.searchParams.get('order') ?? '';
     min-height: 100vh;
     display: grid;
     place-items: center;
-    padding-block: 80px;
+    padding-block: clamp(56px, 8vw, 96px);
   }
+
   .ty__inner {
-    max-width: 560px;
+    max-width: 620px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
   }
+
   .ty__check {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 72px;
-    height: 72px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
     background: var(--gradient-primary);
     color: #fff;
-    font-size: 36px;
-    margin-bottom: 20px;
+    font-size: 42px;
+    line-height: 1;
+    box-shadow: var(--shadow-glow);
   }
-  .ty__order code {
+
+  .ty h1 {
+    margin: 4px 0 0;
+    font-size: clamp(1.7rem, 5vw, 2.4rem);
+    line-height: 1.15;
+  }
+
+  .ty__lead {
+    color: var(--color-text);
+    font-size: clamp(1rem, 2.4vw, 1.1rem);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .ty__lead strong {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 800;
+  }
+
+  .ty__cta {
+    margin-top: 8px;
+    width: min(100%, 380px);
+    min-height: 60px;
+    padding: 14px 24px;
+    border-radius: 18px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .ty__cta-icon {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+  }
+
+  .ty__steps {
+    margin: 18px 0 0;
+    padding: 22px 24px 22px 56px;
+    list-style: decimal;
+    text-align: left;
     background: var(--color-bg-elev);
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+    line-height: 1.55;
+    width: 100%;
   }
-  .ty .btn {
-    margin-top: 16px;
+
+  .ty__steps li {
+    padding: 4px 0;
+  }
+
+  .ty__steps strong {
+    color: var(--color-accent);
+  }
+
+  .ty__support {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin: 12px 0 0;
+  }
+
+  .ty__support a {
+    color: var(--color-accent);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .ty__support a:hover {
+    text-decoration: underline;
+  }
+
+  .ty__home {
+    margin-top: 8px;
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .ty__home:hover {
+    color: var(--color-text);
   }
 </style>

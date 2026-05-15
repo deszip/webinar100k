@@ -4,11 +4,31 @@ import { hero } from '../../data/content';
 
 <section class="hero" id="top">
   <div class="container hero__inner">
-    <h1 class="hero__title">{hero.title}</h1>
+    <h1 class="hero__title">
+      {hero.titleLines.map((line) => <span>{line}</span>)}
+    </h1>
 
     <p class="hero__author">{hero.authorLine}</p>
 
-    <p class="hero__subtitle">{hero.subtitle}</p>
+    <ul class="hero__bullets">
+      {
+        hero.bullets.map((b) => (
+          <li>
+            <svg class="hero__bullet-check" viewBox="0 0 20 20" aria-hidden="true">
+              <path
+                d="M4 10.5 L 8.5 15 L 16 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span set:html={b}></span>
+          </li>
+        ))
+      }
+    </ul>
 
     <div class="hero__price" aria-label={hero.price.eyebrow}>
       <span class="hero__price-eyebrow">{hero.price.eyebrow}</span>
@@ -24,12 +44,71 @@ import { hero } from '../../data/content';
       <a href={hero.ctaPrimary.href} class="btn btn-primary">{hero.ctaPrimary.label}</a>
     </div>
 
-    <ul class="hero__bullets">
-      {hero.bullets.map((b) => <li>{b}</li>)}
-    </ul>
   </div>
 
-  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__bg" aria-hidden="true">
+    <span class="hero__bg-blob hero__bg-blob--ig"></span>
+    <span class="hero__bg-blob hero__bg-blob--purple"></span>
+    <span class="hero__bg-symbol hero__bg-symbol--uah">₴</span>
+    <span class="hero__bg-symbol hero__bg-symbol--usd">$</span>
+    <svg class="hero__bg-ig hero__bg-ig--tl" viewBox="0 0 56 56">
+      <defs>
+        <linearGradient id="heroIgGrad1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fcb045" />
+          <stop offset="50%" stop-color="#e94077" />
+          <stop offset="100%" stop-color="#7957d5" />
+        </linearGradient>
+      </defs>
+      <rect
+        x="3"
+        y="3"
+        width="50"
+        height="50"
+        rx="14"
+        fill="none"
+        stroke="url(#heroIgGrad1)"
+        stroke-width="4"
+      />
+      <circle
+        cx="28"
+        cy="28"
+        r="11"
+        fill="none"
+        stroke="url(#heroIgGrad1)"
+        stroke-width="4"
+      />
+      <circle cx="42" cy="14" r="3.2" fill="url(#heroIgGrad1)" />
+    </svg>
+
+    <svg class="hero__bg-ig hero__bg-ig--br" viewBox="0 0 56 56">
+      <defs>
+        <linearGradient id="heroIgGrad2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fcb045" />
+          <stop offset="50%" stop-color="#e94077" />
+          <stop offset="100%" stop-color="#7957d5" />
+        </linearGradient>
+      </defs>
+      <rect
+        x="3"
+        y="3"
+        width="50"
+        height="50"
+        rx="14"
+        fill="none"
+        stroke="url(#heroIgGrad2)"
+        stroke-width="4"
+      />
+      <circle
+        cx="28"
+        cy="28"
+        r="11"
+        fill="none"
+        stroke="url(#heroIgGrad2)"
+        stroke-width="4"
+      />
+      <circle cx="42" cy="14" r="3.2" fill="url(#heroIgGrad2)" />
+    </svg>
+  </div>
 </section>
 
 <style>
@@ -41,17 +120,27 @@ import { hero } from '../../data/content';
 
   .hero__inner {
     text-align: center;
-    max-width: 760px;
+    max-width: 1080px;
   }
 
   .hero__title {
     margin-bottom: 16px;
-    font-size: clamp(2.05rem, 8.2vw, 4.75rem);
-    line-height: 1.02;
+    font-size: clamp(1.85rem, 5.6vw, 3.2rem);
+    line-height: 1.08;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0;
     overflow-wrap: anywhere;
+  }
+
+  .hero__title span {
+    display: block;
+  }
+
+  @media (min-width: 760px) {
+    .hero__title span {
+      white-space: nowrap;
+    }
   }
 
   .hero__author {
@@ -62,12 +151,46 @@ import { hero } from '../../data/content';
     font-size: clamp(1rem, 2.5vw, 1.15rem);
   }
 
-  .hero__subtitle {
-    color: var(--color-text-muted);
-    font-size: clamp(0.98rem, 2.3vw, 1.12rem);
-    line-height: 1.5;
-    max-width: 660px;
-    margin: 0 auto 22px;
+  .hero__bullets {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 4px auto 26px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  .hero__bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--color-text);
+    font-size: clamp(0.98rem, 2.3vw, 1.08rem);
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  .hero__bullets li span {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .hero__bullets strong {
+    font-weight: 800;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .hero__bullet-check {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    color: var(--color-accent);
+    filter: drop-shadow(0 2px 6px rgba(240, 79, 134, 0.25));
   }
 
   .hero__price {
@@ -145,37 +268,121 @@ import { hero } from '../../data/content';
     white-space: normal;
   }
 
-  .hero__bullets {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px 18px;
-    color: var(--color-text-muted);
-    font-size: 14px;
-  }
-
-  .hero__bullets li {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .hero__bullets li::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-accent-3);
-  }
-
-  .hero__glow {
+  .hero__bg {
     position: absolute;
-    inset: -20% 50% auto -20%;
-    height: 480px;
-    background: radial-gradient(circle, rgba(240, 79, 134, 0.18), transparent 62%);
-    filter: blur(70px);
+    inset: 0;
+    overflow: hidden;
     pointer-events: none;
     z-index: -1;
+  }
+
+  .hero__bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+  }
+
+  /* Instagram-flavoured rainbow blob (yellow → orange → pink → purple) */
+  .hero__bg-blob--ig {
+    width: clamp(420px, 70vw, 680px);
+    height: clamp(420px, 70vw, 680px);
+    top: -22%;
+    left: -18%;
+    background: conic-gradient(
+      from 200deg,
+      rgba(252, 176, 69, 0.42),
+      rgba(253, 29, 29, 0.32),
+      rgba(233, 64, 119, 0.42),
+      rgba(120, 86, 214, 0.34),
+      rgba(252, 176, 69, 0.42)
+    );
+    opacity: 0.75;
+  }
+
+  .hero__bg-blob--purple {
+    width: clamp(360px, 60vw, 560px);
+    height: clamp(360px, 60vw, 560px);
+    bottom: -28%;
+    right: -18%;
+    background: radial-gradient(
+      circle,
+      rgba(120, 86, 214, 0.34),
+      rgba(233, 64, 119, 0.18) 55%,
+      transparent 72%
+    );
+    opacity: 0.85;
+  }
+
+  /* Floating currency symbols (money theme) */
+  .hero__bg-symbol {
+    position: absolute;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    user-select: none;
+  }
+
+  .hero__bg-symbol--uah {
+    top: 4%;
+    right: 3%;
+    font-size: clamp(120px, 18vw, 230px);
+    opacity: 0.18;
+    transform: rotate(-12deg);
+  }
+
+  .hero__bg-symbol--usd {
+    bottom: 6%;
+    left: 4%;
+    font-size: clamp(80px, 12vw, 160px);
+    opacity: 0.14;
+    transform: rotate(14deg);
+  }
+
+  /* Instagram camera icons */
+  .hero__bg-ig {
+    position: absolute;
+    height: auto;
+    opacity: 0.32;
+  }
+
+  .hero__bg-ig--tl {
+    top: 16%;
+    left: 5%;
+    width: clamp(44px, 6vw, 64px);
+    transform: rotate(-10deg);
+  }
+
+  .hero__bg-ig--br {
+    bottom: 12%;
+    right: 5%;
+    width: clamp(72px, 9vw, 100px);
+    transform: rotate(12deg);
+    opacity: 0.36;
+  }
+
+  @media (max-width: 600px) {
+    .hero__bg-symbol--usd,
+    .hero__bg-ig--tl {
+      display: none;
+    }
+
+    .hero__bg-ig--br {
+      width: 56px;
+      bottom: 8%;
+      right: 8px;
+      opacity: 0.3;
+    }
+
+    .hero__bg-symbol--uah {
+      top: 2%;
+      right: -10px;
+      font-size: 150px;
+      opacity: 0.14;
+    }
   }
 
   @media (max-width: 480px) {
@@ -184,7 +391,7 @@ import { hero } from '../../data/content';
     }
 
     .hero__title {
-      font-size: clamp(2rem, 10vw, 2.85rem);
+      font-size: clamp(1.7rem, 9vw, 2.4rem);
     }
 
     .hero__price {
@@ -197,19 +404,8 @@ import { hero } from '../../data/content';
     }
 
     .hero__bullets {
-      display: grid;
-      justify-content: stretch;
-      text-align: left;
-      gap: 10px;
-    }
-
-    .hero__bullets li {
-      align-items: flex-start;
-    }
-
-    .hero__bullets li::before {
-      flex: 0 0 auto;
-      margin-top: 8px;
+      display: flex;
+      width: 100%;
     }
   }
 </style>
