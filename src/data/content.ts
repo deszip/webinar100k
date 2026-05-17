@@ -38,9 +38,12 @@ export const webinarButton = {
 export const hero = {
   eyebrow: 'Вебінар для експертів, блогерів і власників послуг',
   badges: ['Вебінар у записі', 'Доступ одразу після оплати'],
+  // Inner array = one desktop line.
+  // On mobile each chunk renders on its own line (4 lines total),
+  // on desktop the chunks within a row sit on one line (2 lines total).
   titleLines: [
-    'Як заробляти 100 000+ грн',
-    'в Instagram без великої аудиторії',
+    ['Як заробляти', '100 000+ грн'],
+    ['в Instagram без', 'великої аудиторії'],
   ],
   authorLine: 'Від Наталі Гаєвської - SMM-експертки, засновниці SMM-агентства та авторки курсів з 1000+ учнів',
   price: {
@@ -53,7 +56,7 @@ export const hero = {
   ctaPrimary: { label: 'Отримати доступ до вебінару', href: wayforpayUrl },
   ctaSecondary: { label: 'Отримати доступ до вебінару', href: wayforpayUrl },
   bullets: [
-    'Система для експертів, послуг і особистого бренду',
+    'Для експертів, магазинів і особистого бренду',
     'Фокус на органічному залученні без обов\'язкового таргету',
     'Стратегія від SMM-експерта з 8+ роками практичного досвіду',
     '+ Бонус: <strong>Конструктор розмовних Reels</strong>',

@@ -5,7 +5,18 @@ import { hero } from '../../data/content';
 <section class="hero" id="top">
   <div class="container hero__inner">
     <h1 class="hero__title">
-      {hero.titleLines.map((line) => <span>{line}</span>)}
+      {
+        hero.titleLines.map((row) => (
+          <span class="hero__title-row">
+            {row.map((chunk, i) => (
+              <>
+                {i > 0 && ' '}
+                <span class="hero__title-chunk">{chunk}</span>
+              </>
+            ))}
+          </span>
+        ))
+      }
     </h1>
 
     <p class="hero__author">{hero.authorLine}</p>
@@ -133,13 +144,23 @@ import { hero } from '../../data/content';
     overflow-wrap: anywhere;
   }
 
-  .hero__title span {
+  .hero__title-row {
     display: block;
   }
 
+  /* Mobile: each chunk on its own line → 4 lines total */
+  .hero__title-chunk {
+    display: block;
+  }
+
+  /* Desktop: chunks within a row sit on one line → 2 lines total */
   @media (min-width: 760px) {
-    .hero__title span {
+    .hero__title-row {
       white-space: nowrap;
+    }
+
+    .hero__title-chunk {
+      display: inline;
     }
   }
 
